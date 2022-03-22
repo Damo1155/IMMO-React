@@ -1,0 +1,38 @@
+{
+  "compileOnSave": false,
+  "include": [
+    "src/**.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "jsx": "react",
+    "allowJs": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module":"CommonJS",
+    "moduleResolution":"Node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "lib": [
+      "ES7",
+      "DOM",
+      "ES2021"
+    ],    
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+
+    "baseUrl": ".",
+    "paths": {
+      "SCSS/*": [ "src/SCSS/*" ],
+      "Enums/*": [ "src/Enums/*" ],
+      "Pages/*": [ "src/Pages/*" ],
+      "Models/*": [ "src/Models/*" ],
+      "Services/*": [ "src/Services/*" ],
+      "Components/*": [ "src/Components/*" ],
+      "TestDependencies/*": [ "src/TestDependencies/*" ]
+    }
+  }
+}
