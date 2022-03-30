@@ -1,0 +1,28 @@
+.alert {
+    margin-top: 0.5rem;
+    margin-bottom: 0.625rem;
+    white-space: normal;
+    padding: 0.5rem 1rem;
+
+    .icon {
+        display: inline;
+        float: left;
+
+        svg {
+            font-size: 1.5em;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        // Purpose  :   Fixes an issue where alerts which use spinners have margin top added.
+        .fa-spinner {
+            margin-top: -0.7rem;
+        }
+    }
+
+    .text {
+        text-align: left;
+        margin: 0 0 0 4.125rem;
+    }
+}

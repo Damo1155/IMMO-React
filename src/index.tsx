@@ -4,8 +4,18 @@ import ReactDOM from "react-dom";
 // Styles
 import "SCSS/site-layout.scss";
 
+// Components
+import SiteHeader from "Pages/Structure/SiteHeader";
+import PropertySearchTool from "Pages/PropertySearch/PropertySearchTool";
+
 const App = () => (
-  <h1>React Typescript Application - Sandbox 2</h1>
+  <div>
+    <SiteHeader></SiteHeader>
+
+    <div className="container-fluid">
+      <PropertySearchTool></PropertySearchTool>
+    </div>
+  </div>
 );
 
 ReactDOM.render(

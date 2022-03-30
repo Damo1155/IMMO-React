@@ -1,0 +1,22 @@
+@import "../../Variables/screen-resolutions.scss";
+
+.immo-search-group {
+    display: flex;
+
+    button {
+        margin-left: 2.5rem;
+    }
+
+    @media #{$mq-maxwidth-xs} {
+        button {
+            margin-left: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        input {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+}

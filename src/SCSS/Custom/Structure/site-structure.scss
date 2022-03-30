@@ -1,0 +1,26 @@
+@import "../../Variables/colours.scss";
+
+.immo-nav-header {
+    height: 7rem;
+    margin-bottom: 0.625rem;
+
+    .immo-nav-branding {
+        height: 100%;
+        background: linear-gradient(0, $immo-white 25%, $immo-navigation-header 25%);
+
+        .immo-brand-logo {
+            padding: 0.625rem;
+
+            img {
+                height: 5.625rem;
+                border: 0.313rem solid $immo-white;
+            }
+        }
+
+        .immo-pageheader {
+            div {
+                padding-top: 1.25rem;
+            }
+        }
+    }
+}

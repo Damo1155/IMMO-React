@@ -1,0 +1,38 @@
+// Important    :   This file is designed to specifically deal with screen resolutions so it's possible to create specific media queries for scalability.
+// Source One   :   https://css-tricks.com/optimizing-large-scale-displays/
+// Source Two   :   https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries
+
+// Breakpoints
+$bp-xxs: 21.563rem; // 345px
+$bp-xs: 29.375rem; // 470px
+$bp-small: 48rem; // 768px
+$bp-medium: 64rem; // 1024px
+$bp-large: 85.375rem; // 1366px
+$bp-xlarge: 120rem; // 1920px
+$bp-xxlarge: 160rem; // 2560px
+
+$bp-700: 43.75rem; // 700px
+
+// Media Queries
+$mq-minwidth-xxs: "(min-width: #{$bp-xxs})";
+$mq-minwidth-xs: "(min-width: #{$bp-xs})";
+$mq-minwidth-s: "(min-width: #{$bp-small})";
+$mq-minwidth-m: "(min-width: #{$bp-medium})";
+$mq-minwidth-l: "(min-width: #{$bp-large})";
+$mq-minwidth-xl: "(min-width: #{$bp-xlarge})";
+$mq-minwidth-xxl: "(min-width: #{$bp-xxlarge})";
+$mq-minwidth-700: "(min-width: #{$bp-700})";
+
+$mq-maxwidth-xxs: "(max-width: #{$bp-xxs})";
+$mq-maxwidth-xs: "(max-width: #{$bp-xs})";
+$mq-maxwidth-s: "(max-width: #{$bp-small})";
+$mq-maxwidth-m: "(max-width: #{$bp-medium})";
+$mq-maxwidth-l: "(max-width: #{$bp-large})";
+$mq-maxwidth-xl: "(max-width: #{$bp-xlarge})";
+$mq-maxwidth-xxl: "(max-width: #{$bp-xxlarge})";
+$mq-maxwidth-700: "(max-width: #{$bp-700})";
+
+$mq-minwidth-retina: "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)";
+
+$standard-desktop-resolutions: "(min-width: #{$bp-medium}), (min-width: #{$bp-large}), (min-width: #{$bp-xlarge}), (min-width: #{$bp-xxlarge})";
+$main-resolutions: "(min-width: #{$bp-small}), (min-width: #{$bp-medium}), (min-width: #{$bp-large}), (min-width: #{$bp-xlarge}), (min-width: #{$bp-xxlarge})";

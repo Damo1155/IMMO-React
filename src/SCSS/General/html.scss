@@ -1,0 +1,44 @@
+@import "../Variables/fonts.scss";
+@import "../Variables/colours.scss";
+@import "../Variables/line-heights.scss";
+@import "../Variables/screen-resolutions.scss";
+
+html, body {
+    height: 100%;
+}
+
+body {
+    color: $immo-base-font-colour;
+    font-size: $immo-base-font-size;
+    line-height: $immo-base-line-height;
+
+    @media #{$mq-minwidth-m} {
+        font-size: $medium-font-size;
+        line-height: $immo-base-line-height;
+    }
+
+    @media #{$mq-minwidth-l} {
+        font-size: $large-font-size;
+    }
+
+    @media #{$mq-minwidth-xl} {
+        font-size: $xlarge-font-size;
+    }
+
+    @media #{$mq-minwidth-xxl} {
+        font-size: $xxlarge-font-size;
+    }
+}
+
+label {
+    display: block;
+    cursor: pointer;
+    margin-bottom: 0.5rem !important;
+}
+
+label, span {
+    &.immo-required::after {
+        content: ' *';
+        color: $immo-required-colour;
+    }
+}
