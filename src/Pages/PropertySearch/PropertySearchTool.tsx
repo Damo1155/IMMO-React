@@ -8,7 +8,7 @@ import {
 
 // Models
 import { MappedProperty, MappedPropertyBase } from "Models/Modules/PropertiesConfiguration";
-import { PropertySearchState, CustomMessages, Identifiers } from "Models/Modules/PropertySearchTool";
+import { ModuleState, ModuleConfiguration } from "Models/Modules/PropertySearchToolConfiguration";
 
 // Components
 import InputText from "Components/Inputs/InputText";
@@ -23,19 +23,20 @@ import {
 } from "Services/Bootstrap/ToastService";
 
 // Configuration
-const customMessages = {
-    Search: "Search",
-    Address: "Address",
-    PropertyTypes: "Property types",
-    LoadingProperties: "Loading properties",
-    AddressRequired: "Please ensure an address has been provided"
-} as CustomMessages;
+const configuration = {
+    CustomMessages: {
+        Search: "Search",
+        Address: "Address",
+        PropertyTypes: "Property types",
+        LoadingProperties: "Loading properties",
+        AddressRequired: "Please ensure an address has been provided"
+    },
+    Identifiers: {
+        Address: "immo-address-search"
+    }
+} as ModuleConfiguration;
 
-const identifiers = {
-    Address: "immo-address-search"
-} as Identifiers;
-
-export default class PropertySearchTool extends React.Component <unknown, PropertySearchState> {
+export default class PropertySearchTool extends React.Component <unknown, ModuleState> {
     constructor(props: unknown) {
         super(props);
 
@@ -70,11 +71,11 @@ export default class PropertySearchTool extends React.Component <unknown, Proper
         }
 
         const fieldsToValidate = [
-            identifiers.Address
+            configuration.Identifiers.Address
         ] as Array<string>;
 
         if (!IsValid(fieldsToValidate)) {
-            ToastValidationError(customMessages.AddressRequired);
+            ToastValidationError(configuration.CustomMessages.AddressRequired);
 
             return;
         }
@@ -85,17 +86,16 @@ export default class PropertySearchTool extends React.Component <unknown, Proper
             DisplayHelpMessage: false
         });
         
-        const address = "";
+        const address = "Alte";
         const propertyType = undefined;
         // const address = RetrieveValue(this.Identifiers.Address) as string;
-        const toastIdentifier = ToastProcessing(customMessages.LoadingProperties);
+        const toastIdentifier = ToastProcessing(configuration.CustomMessages.LoadingProperties);
 
         // Purpose  :   Some requests are being bubbled back up with an object rather than string.
         // const propertyType = (typeof type === "string" ? type : undefined) as string;
 
         fetchProperties({ address, propertyType })
             .then(({ properties }) => {
-                console.log(properties);
                 const ids = properties.map((property) => property.id);
 
                 this.RetrievePropertyDetails(ids, toastIdentifier);
@@ -116,9 +116,7 @@ export default class PropertySearchTool extends React.Component <unknown, Proper
         });
 
         const selectedProperties = this.state.SelectedProperties;
-
-        // Note :   To combat significant UI lag the following is wrapped in a promise so they're
-        //          all resolved at the same point.
+        
         Promise.all(promises)
             .then((response) => {
                 const mappedProperties =
@@ -143,15 +141,16 @@ export default class PropertySearchTool extends React.Component <unknown, Proper
                 ToastError();
             })
             .finally(() => {
-                this.setState({ IsProcessingSearch: false });
                 ToastDestroy(toastIdentifier);
+                
+                this.setState({ IsProcessingSearch: false });
             });
     }
 
     private BuildPropertyTypes = (): JSX.Element => {
         const mappedPropertyTypes = this.state.PropertyTypes
             .map((propertyType: PropertyType, index: number) => {
-                const uniqueKey = `property-type-${index + 1}`
+                const uniqueKey = `property-type-${index + 1}`;
 
                 return (
                     <li key={uniqueKey}>
@@ -162,7 +161,7 @@ export default class PropertySearchTool extends React.Component <unknown, Proper
 
         return mappedPropertyTypes.length > 0 ? (
             <div>
-                <h2 className="h5 mb-3">{customMessages.PropertyTypes}</h2>
+                <h2 className="h5 mb-3">{configuration.CustomMessages.PropertyTypes}</h2>
 
                 <div className="immo-property-types">
                     <ul>{mappedPropertyTypes}</ul>
@@ -178,16 +177,16 @@ export default class PropertySearchTool extends React.Component <unknown, Proper
                     <div className="col-md-2" aria-hidden="true" role="presentation"></div>
                     <div className="col-md-10">
                         <form onSubmit={this.ProcessSearch} className="mb-3">
-                            <h2 className="h5 mb-3">{customMessages.Search}</h2>
+                            <h2 className="h5 mb-3">{configuration.CustomMessages.Search}</h2>
 
                             <div className="immo-search-group">
-                                <InputText Text={customMessages.Address} FieldIdentifier={identifiers.Address} 
+                                <InputText Text={configuration.CustomMessages.Address} FieldIdentifier={configuration.Identifiers.Address} 
                                            IsRequired={true} AsPlaceholder={true}></InputText>
-                                <SubmitAction Text={customMessages.Search} IsProcessing={this.state.IsProcessingSearch}></SubmitAction>
+                                <SubmitAction Text={configuration.CustomMessages.Search} IsProcessing={this.state.IsProcessingSearch}></SubmitAction>
                             </div>
                         </form>
 
-                        <SelectedSearchResults></SelectedSearchResults>
+                        <SelectedSearchResults SelectedProperties={this.state.SelectedProperties}></SelectedSearchResults>
                     </div>
                 </div>
 
@@ -196,7 +195,8 @@ export default class PropertySearchTool extends React.Component <unknown, Proper
                         {this.BuildPropertyTypes()}
                     </div>
                     <div className="col-md-10">
-                        <SearchResults></SearchResults>
+                        <SearchResults IsProcessingSearch={this.state.IsProcessingSearch} DisplayHelpMessage={this.state.DisplayHelpMessage}
+                                       Properties={this.state.Properties}></SearchResults>
                     </div>
                 </div>
             </div>

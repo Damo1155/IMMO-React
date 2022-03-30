@@ -1,9 +1,8 @@
 // Models
-import { string } from "yup";
 import { PropertyType } from "../../TestDependencies/api";
 import { MappedPropertyBase, MappedProperty } from "./PropertiesConfiguration";
 
-export interface PropertySearchState {
+export interface ModuleState {
     DisplayHelpMessage: boolean;
     IsProcessingSearch: boolean;
 
@@ -12,7 +11,12 @@ export interface PropertySearchState {
     SelectedProperties: Array<MappedPropertyBase>;
 }
 
-export interface CustomMessages {
+export interface ModuleConfiguration {
+    Identifiers: Identifiers;
+    CustomMessages: CustomMessages;
+}
+
+interface CustomMessages {
     Search: string;
     Address: string;
     PropertyTypes: string;
@@ -20,6 +24,6 @@ export interface CustomMessages {
     LoadingProperties: string;
 }
 
-export interface Identifiers {
+interface Identifiers {
     Address: string;
 }
